@@ -1,10 +1,11 @@
-/* ===== Variables (reprises du site original) ===== */
+/* ===== Variables ===== */
 :root {
   --violet-500: #7848FF;
   --violet-600: #6338DC;
   --violet-100: #E9E4FF;
   --orange-300: #FFB18A;
   --orange-500: #FF8F57;
+  --vert-500: #1EA97C;
   --gris-0: #FFFFFF;
   --gris-100: #F7F7FA;
   --gris-200: #DCDCE2;
@@ -15,6 +16,7 @@
   --font-primary: 'Inter', sans-serif;
   --font-secondary: 'Poppins', 'Source Sans Pro', sans-serif;
 
+  --spacing-8: 8px;
   --spacing-16: 16px;
   --spacing-24: 24px;
   --spacing-40: 40px;
@@ -53,6 +55,11 @@ ul {
   list-style: none;
 }
 
+img {
+  max-width: 100%;
+  display: block;
+}
+
 /* ===== Boutons ===== */
 .btn {
   display: inline-block;
@@ -75,22 +82,26 @@ ul {
 /* ===== Header ===== */
 .site-header {
   display: flex;
-  align-items: center;
+  align-items: flex-end;
   justify-content: space-between;
   padding: var(--spacing-16) var(--spacing-40);
   background-color: var(--gris-0);
-  border-bottom: 1px solid var(--gris-200);
+  border-bottom: 2px solid var(--gris-900);
 }
 
-.logo {
-  font-weight: 700;
-  font-size: 1.2em;
-  letter-spacing: 0.05em;
+.logo-img {
+  height: 90px;
+  width: auto;
 }
 
 .main-nav {
   display: flex;
-  gap: var(--spacing-24);
+  gap: var(--spacing-40);
+  padding-bottom: var(--spacing-16);
+}
+
+.main-nav a {
+  font-size: 1.1em;
 }
 
 .main-nav a:hover {
@@ -99,20 +110,46 @@ ul {
 
 /* ===== Hero ===== */
 .hero {
-  background-color: var(--violet-100);
-  padding: var(--spacing-80) var(--spacing-40);
-  text-align: center;
+  position: relative;
+  min-height: 650px;
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-end;
+  overflow: hidden;
+}
+
+.hero-image {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.hero-content {
+  position: relative;
+  z-index: 2;
+  padding: var(--spacing-40);
+  text-align: right;
+  max-width: 500px;
+}
+
+.hero-tagline,
+.hero h1 {
+  color: var(--gris-0);
+  font-style: italic;
+  font-weight: 400;
+  text-shadow: 0 2px 8px rgba(0,0,0,0.4);
 }
 
 .hero-tagline {
-  font-style: italic;
-  color: var(--gris-600);
-  margin-bottom: var(--spacing-16);
+  font-size: 1.2em;
+  margin-bottom: var(--spacing-8);
 }
 
 .hero h1 {
-  font-size: 2.4em;
-  margin-bottom: var(--spacing-24);
+  font-family: var(--font-secondary);
+  font-size: 1.6em;
 }
 
 /* ===== Tours ===== */
@@ -133,27 +170,103 @@ ul {
 }
 
 .tour-card {
-  background-color: var(--gris-100);
+  background-color: #E8F4FB;
   border-radius: var(--radius-8);
-  padding: var(--spacing-24);
+  overflow: visible;
+  display: flex;
+  flex-direction: column;
+}
+
+.tour-image-wrap {
+  position: relative;
+}
+
+.tour-image {
+  width: 100%;
+  height: 220px;
+  object-fit: cover;
+  border-radius: var(--radius-8) var(--radius-8) 0 0;
+  background-color: var(--gris-200);
+}
+
+.tour-badge {
+  position: absolute;
+  bottom: -16px;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: var(--vert-500);
+  color: var(--gris-0);
+  font-weight: 700;
+  font-size: 0.95em;
+  padding: 8px 20px;
+  border-radius: var(--radius-8);
+  white-space: nowrap;
+}
+
+.tour-body {
+  padding: var(--spacing-40) var(--spacing-24) var(--spacing-24);
   display: flex;
   flex-direction: column;
   gap: var(--spacing-16);
 }
 
-.tour-card h3 {
-  font-size: 1.2em;
+.tour-details li {
+  font-size: 0.9em;
+  color: var(--gris-800);
+  margin-bottom: 4px;
+}
+
+.tour-footer {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  margin-top: var(--spacing-8);
 }
 
 .tour-price {
+  font-style: italic;
   font-weight: 700;
-  color: var(--violet-500);
+  font-family: var(--font-primary);
 }
 
-.tour-details li {
+.tour-discount-link {
+  color: var(--violet-500);
   font-size: 0.9em;
-  color: var(--gris-600);
-  margin-bottom: 4px;
+  text-decoration: underline;
+}
+
+.btn-book {
+  align-self: flex-start;
+  background-color: #29C5E6;
+  color: var(--gris-0);
+  font-size: 0.9em;
+  padding: 10px 20px;
+}
+
+/* ===== Gallery ===== */
+.gallery {
+  padding: var(--spacing-80) var(--spacing-40);
+  background-color: var(--gris-100);
+}
+
+.gallery h2 {
+  text-align: center;
+  font-size: 2em;
+  margin-bottom: var(--spacing-40);
+}
+
+.gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: var(--spacing-16);
+}
+
+.gallery-grid img {
+  width: 100%;
+  height: 220px;
+  object-fit: cover;
+  border-radius: var(--radius-8);
+  background-color: var(--gris-200);
 }
 
 /* ===== Mission ===== */
